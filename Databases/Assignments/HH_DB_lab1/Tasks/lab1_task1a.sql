@@ -1,7 +1,0 @@
-CREATE DATABASE HH_DB_Lab1;
-
-CREATE TABLE Student(
-  sid PRIMARY KEY CHAR(2) NOT NULL,
-  full_name TEXT NOT NULL,
-  major VARCHAR(4)
-);
