@@ -1,0 +1,505 @@
+Group information: Group 15 (Elton Mineur, Johannes Mattsson Strandmark and Vinicius E. Beuther)
+
+# Task 1 – Data Definition (CREATE TABLE statements for all tables in the model)
+
+CREATE TABLE IF NOT EXISTS Country(
+	country_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    country_name VARCHAR(100) NOT NULL UNIQUE
+);
+
+CREATE TABLE IF NOT EXISTS City(
+	city_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    city_name VARCHAR(100) NOT NULL UNIQUE,
+    country_id INT NOT NULL,
+    FOREIGN KEY(country_id) REFERENCES Country(country_id)
+		ON DELETE RESTRICT
+        ON UPDATE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS Street(
+	street_name VARCHAR(80) NOT NULL,
+    street_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    city_id INT NOT NULL,
+    FOREIGN KEY(city_id) REFERENCES City(city_id)
+		ON DELETE RESTRICT
+        ON UPDATE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS Address(
+	address_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    street_id INT NOT NULL,
+    postal_code VARCHAR(16) NOT NULL,
+    FOREIGN KEY(street_id) REFERENCES Street(street_id)
+		ON DELETE RESTRICT
+        ON UPDATE CASCADE,
+    number SMALLINT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS Heating_Method(
+	heating_method_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    method_name VARCHAR(50) NOT NULL UNIQUE
+);
+
+CREATE TABLE IF NOT EXISTS Appliance(
+	appliance_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    appliance_name VARCHAR(50) NOT NULL UNIQUE
+);
+
+CREATE TABLE IF NOT EXISTS Furniture(
+	furniture_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    furniture_name VARCHAR(50) NOT NULL UNIQUE
+);
+
+CREATE TABLE IF NOT EXISTS Room_Type(
+	room_type_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    room_type VARCHAR(50) NOT NULL UNIQUE
+);
+
+CREATE TABLE IF NOT EXISTS Property_Type(
+	type_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    type_name VARCHAR(50) NOT NULL UNIQUE
+);
+
+CREATE TABLE IF NOT EXISTS Person(
+	person_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    document_number VARCHAR(12) NOT NULL UNIQUE,
+    telephone VARCHAR(12) NOT NULL,
+    email VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS Owner(
+	owner_id INT NOT NULL PRIMARY KEY,
+    address_id INT NOT NULL,
+    FOREIGN KEY(address_id) REFERENCES Address(address_id)
+		ON DELETE RESTRICT
+        ON UPDATE CASCADE,
+    FOREIGN KEY(owner_id) REFERENCES Person(person_id)
+);
+
+CREATE TABLE IF NOT EXISTS O_Address_Complement(
+	owner_id INT NOT NULL PRIMARY KEY,
+    o_address_complement VARCHAR(12) NOT NULL,
+    FOREIGN KEY(owner_id) REFERENCES Owner(owner_id)
+		ON DELETE RESTRICT
+        ON UPDATE CASCADE
+);
+
+
+CREATE TABLE IF NOT EXISTS Property(
+	property_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    type_id INT NOT NULL,
+    address_id INT NOT NULL,
+    owner_id INT NOT NULL,
+    created_at DATE NOT NULL DEFAULT(CURRENT_TIMESTAMP),
+    FOREIGN KEY(type_id) REFERENCES Property_Type(type_id)
+		ON DELETE RESTRICT
+        ON UPDATE CASCADE,
+    FOREIGN KEY(address_id) REFERENCES Address(address_id)
+		ON DELETE RESTRICT
+        ON UPDATE CASCADE,
+    FOREIGN KEY(owner_id) REFERENCES Owner(owner_id)
+		ON DELETE RESTRICT
+		ON UPDATE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS Property_Description(
+	property_id INT NOT NULL PRIMARY KEY,
+    description TEXT,
+    FOREIGN KEY(property_id) REFERENCES Property(property_id)
+		ON DELETE RESTRICT
+        ON UPDATE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS Photo(
+	photo_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    property_id INT NOT NULL,
+    image_path VARCHAR(300),
+    FOREIGN KEY(property_id) REFERENCES Property(property_id)
+		ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS Special_Features(
+	special_feature_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    special_feature VARCHAR(50) NOT NULL UNIQUE
+);
+
+CREATE TABLE IF NOT EXISTS Property_Special_Features(
+	special_feature_id INT NOT NULL,
+    property_id INT NOT NULL,
+    quantity SMALLINT NOT NULL CHECK (quantity >= 0),
+	PRIMARY KEY(special_feature_id, property_id),
+    FOREIGN KEY(special_feature_id) REFERENCES Special_Features(special_feature_id)
+		ON DELETE CASCADE
+        ON UPDATE CASCADE,
+    FOREIGN KEY(property_id) REFERENCES Property(property_id)
+		ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS Room(
+	room_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    room_type_id INT NOT NULL,
+    property_id INT NOT NULL,
+    width DECIMAL(8,2) NOT NULL,
+    height DECIMAL(8,2) NOT NULL,
+    FOREIGN KEY(room_type_id) REFERENCES Room_Type(room_type_id)
+		ON DELETE RESTRICT
+        ON UPDATE CASCADE,
+	FOREIGN KEY(property_id) REFERENCES Property(property_id)
+		ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS Room_Furniture (
+    quantity INT NOT NULL CHECK (quantity >= 0),
+    room_id INT NOT NULL,
+    furniture_id INT NOT NULL,
+    PRIMARY KEY (room_id, furniture_id),
+    FOREIGN KEY (furniture_id) REFERENCES Furniture(furniture_id)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE,
+    FOREIGN KEY (room_id) REFERENCES Room(room_id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS Room_Heating (
+    room_id INT NOT NULL, 
+    heating_method_id INT NOT NULL,
+    quantity INT NOT NULL CHECK (quantity >= 0),
+    PRIMARY KEY (room_id, heating_method_id),
+    FOREIGN KEY (room_id) REFERENCES Room(room_id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+    FOREIGN KEY (heating_method_id) REFERENCES Heating_Method(heating_method_id)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS Room_Appliance (
+    quantity INT NOT NULL CHECK (quantity >= 0),
+    room_id INT NOT NULL,
+    appliance_id INT NOT NULL,
+    PRIMARY KEY (room_id, appliance_id),
+    FOREIGN KEY (room_id) REFERENCES Room(room_id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+    FOREIGN KEY (appliance_id) REFERENCES Appliance(appliance_id)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS Tenant(
+tenant_id INT NOT NULL PRIMARY KEY,
+FOREIGN KEY(tenant_id) REFERENCES Person(person_id)
+	ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS Tenancy_Agreement(
+		tenancy_agreement_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+        tenant_id INT NOT NULL,
+        property_id INT NOT NULL,
+        rent_amount DECIMAL(10,2) NOT NULL,
+        end_date DATE NOT NULL,
+        start_date DATE NOT NULL,
+        FOREIGN KEY(tenant_id) REFERENCES Tenant(tenant_id)
+			ON DELETE RESTRICT
+            ON UPDATE CASCADE,
+		FOREIGN KEY(property_id) REFERENCES Property(property_id)
+			ON DELETE RESTRICT 
+			ON UPDATE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS P_Address_Complement(
+	property_id INT NOT NULL PRIMARY KEY,
+    p_address_complement VARCHAR(12) NOT NULL,
+	FOREIGN KEY(property_id) REFERENCES Property(property_id)
+		ON DELETE RESTRICT
+        ON UPDATE CASCADE
+    );
+
+
+
+# Task 2 - Data Definition (INSERT statements for all tables in the model)
+
+INSERT INTO Country (country_id, country_name)
+VALUES 
+(1, 'Sweden'),
+(2, 'Ireland'),
+(3, 'England'),
+(4, 'Brazil'),
+(5, 'Japan'),
+(6, 'France');
+
+INSERT INTO City (city_id, city_name, country_id)
+VALUES 
+(1, 'Halmstad', 1),
+(2, 'Dublin', 2),
+(3, 'Liverpool', 3),
+(4, 'Brasilia', 4),
+(5, 'Osaka', 5),
+(6, 'Calais', 6);
+
+INSERT INTO Street (city_id, street_id, street_name)
+VALUES 
+(1, 1, 'Hyltegatan'),
+(1, 2, 'Andersbergsringen'),
+(2, 3, 'Windmill Road'),
+(3, 4, 'Langton Road'),
+(3, 5, 'Barlow\'s Lane'),
+(6, 6, 'Rue Henri Guillaumet');
+
+INSERT INTO Address (address_id, street_id, postal_code, number)
+VALUES 
+(1, 1, '302 37', 6),
+(2, 2, '302 22', 195),
+(3, 3, 'D12 H4F3', 35),
+(4, 6, '62100' , 46),
+(5, 5, 'L4 3QP', 33);
+
+INSERT INTO Property_Type (type_id, type_name)
+VALUES
+(1, 'Apartment'),
+(2, 'House'),
+(3, 'Cabin'),
+(4, 'Office');
+
+INSERT INTO Special_Features (special_feature_id, special_feature)
+VALUES
+(1, 'Balcony'),
+(2, 'Garden'),
+(3, 'Attic'),
+(4, 'Elevator');
+
+INSERT INTO Heating_Method (heating_method_id, method_name)
+VALUES
+(1, 'Radiator'),
+(2, 'Wood Stove'),
+(3, 'Space Heater'),
+(4, 'Climate Control');
+
+INSERT INTO Furniture (furniture_id, furniture_name)
+VALUES
+(1, 'Chair'),
+(2, 'Table'),
+(3, 'Couch'),
+(4, 'Bed');
+
+INSERT INTO Appliance (appliance_id, appliance_name)
+VALUES
+(1, 'Dishwasher'),
+(2, 'Washing Machine'),
+(3, 'Dryer'),
+(4, 'TV'),
+(5, 'Lights');
+
+INSERT INTO Room_Type (room_type_id, room_type)
+VALUES
+(1, 'Bathroom'),
+(2, 'Bedroom'),
+(3, 'Kitchen'),
+(4, 'Living Room');
+
+INSERT INTO Person (person_id, first_name, last_name, telephone, email, document_number)
+VALUES
+(1, 'Christian', 'Kylin', '035-13 84 40', 'christian.kylin@hfab.se', '831216-2626'),
+(2, 'Shauna', 'O´Brien', '01 459 4433', 'shauna@broe.ie', '950328-4646'),
+(3, 'Linus', 'Persson', '0736 486 215', 'linus.persson99@gmail.com', '011111-0110'),
+(4, 'Emma', 'Bok', '0702 345 678', 'emma@example.com', '010422-1211'),
+(5, 'Mao', 'Zedong', '1512 202 455', 'maoism@prc.ch', '931226-1921'),
+(6, 'Jeremy', 'Clarkson', '0516 048 239', 'jclarkson@amazon.com', '600411-4862');
+
+INSERT INTO Owner (address_id, owner_id)
+VALUES
+(1, 1),
+(3, 2),
+(1, 4),
+(4, 5);
+
+INSERT INTO O_Address_Complement (owner_id, o_address_complement)
+VALUES
+(1, 'Apt. 1204'),
+(4, 'Apt. 1201'),
+(2, 'Apt. 1203'),
+(5, 'Apt. 1205');
+
+INSERT INTO Tenant (tenant_id)
+VALUES
+(3),
+(4),
+(5),
+(6);
+
+INSERT INTO Property (address_id, owner_id, property_id, type_id)
+VALUES
+(1, 1, 1, 1),
+(2, 1, 2, 1),
+(3, 2, 3, 2),
+(4, 4, 4, 2),
+(5, 5, 5, 4);
+
+INSERT INTO Property_Description (property_id, description)
+VALUES
+(1, 'Arkitektgatan, Fågelvägen, Hyltegatan, Vindilsvägen Byggnaderna består av två-, tre- och fyravåningshus utan hiss samt ett sjuvåningshus med hiss, flertalet lägenheter har balkong. Tvättstuga finns i källarplan. Garage finns att hyra. Storlek 4 rum o kök. Yta 87.8 kvm. Pris 11844 kr/mån. Ingår: Balkong söder, Diskmaskin, Hiss, Lägenheten är ansluten till stadsnätet, Tvätt & torktumlare.'),
+(2, 'Storlek 1 rum o kök. Yta 45.7 kvm. Pris 6000 kr/mån. Ingår: Diskmaskin, Hiss, Lägenheten är ansluten till stadsnätet, Tvätt & torktumlare. Tvättstuga finns i området. Garage finns att hyra.'),
+(3, 'BROE auctioneers is delighted to present 35 Windmill Road to the market. This stunning extended three-bedroom property is located in one of the most sought-after areas of Dublin 12. The house has been maintained to an impeccable standard and offers an excellent opportunity for those looking for more space to grow their family or to establish themselves in the heart of Dublin 12. The interior living space is bright and airy throughout. Upon entering the ground floor, you are welcomed by a bright entrance hallway, which features a ground-floor bedroom and leads to a spacious lounge area. Through the double doors, you will find a bright kitchen extension that boasts large double doors opening onto a low-maintenance, south-facing garden. The first floor comprises two well-proportioned bedrooms and a newly renovated family bathroom. The location is superb, as 35 Windmill Road is just a short stroll from Crumlin village, which offers a host of amenities right on your doorstep, including shops, cafes, restaurants, and St. Agnes Church. The property is also conveniently located near Pearse Park, Crumlin GAA Club, and Crumlin Swimming Pool and boxing club. The Ashleaf Shopping Centre, which includes Dunnes Stores, is close by, and Tesco in Crumlin village is a short walk away. There are plenty of local bars and restaurants in the immediate area as well. The area is home to excellent schools, and public transport is easily accessible via numerous bus routes, with both the M50 and city centre within reach. This property is likely to attract significant interest, so early viewing is highly recommended.'),
+(5, 'Large office building located in central Liverpool, previously housed working force of CCP leader Mao Zedong');
+
+INSERT INTO P_Address_Complement (property_id, p_address_complement)
+VALUES 
+(1, 'Apt. 1102'),
+(2, 'Apt. 4101'),
+(3, 'Apt. 1109U'),
+(5, 'Room 1090');
+
+INSERT INTO Property_Special_Features (property_id, quantity, special_feature_id)
+VALUES
+(1, 1, 1),
+(2, 1, 4),
+(3, 1, 2),
+(4, 1, 2),
+(5, 2, 4),
+(5, 1, 2);
+
+INSERT INTO Tenancy_Agreement (property_id, tenancy_agreement_id, rent_amount, tenant_id, start_date, end_date)
+VALUES
+(2, 1, 6000, 3, 20221001, 20251001),
+(5, 2, 15000, 5, 19430619, 19760909),
+(5, 3, 35000, 6, 20021020, 20150315),
+(1, 4, 11844, 4, 20250531, 20450531);
+
+INSERT INTO Room (property_id, room_id, room_type_id, height, width)
+VALUES
+(2, 201, 3, 2.12, 4.05),
+(2, 202, 4, 5.5, 2.3),
+(2, 203, 1, 2.21, 4.48),
+(3, 301, 2, 4.26, 2.72),
+(3, 302, 4, 4.83, 3.4),
+(3, 303, 3, 4.65, 2.84),
+(3, 304, 1, 1.49, 1.9),
+(3, 305, 2, 3.65, 3.33),
+(3, 306, 2, 3.11, 2.82);
+
+INSERT INTO Room_Appliance (appliance_id, room_id, quantity)
+VALUES
+(1, 201, 1),
+(4, 202, 1),
+(2, 203, 1),
+(3, 203, 1),
+(4, 301, 1),
+(5, 301, 3),
+(4, 302, 1),
+(5, 302, 2),
+(5, 303, 6),
+(5, 304, 1),
+(4, 305, 1),
+(5, 305, 2),
+(4, 306, 1),
+(5, 306, 4);
+
+INSERT INTO Room_Furniture (furniture_id, room_id, quantity)
+VALUES
+(1, 202, 2),
+(2, 202, 3),
+(3, 202, 1),
+(4, 202, 1),
+(4, 301, 1),
+(3, 302, 2),
+(2, 302, 1),
+(1, 303, 4),
+(2, 303, 1),
+(4, 305, 1),
+(2, 305, 1),
+(4, 306, 2),
+(2, 306, 1);
+
+INSERT INTO Room_Heating (heating_method_id, room_id, quantity)
+VALUES
+(1, 201, 1),
+(1, 202, 1),
+(1, 301, 1),
+(1, 302, 1),
+(1, 303, 1),
+(1, 305, 1),
+(1, 306, 1);
+
+INSERT INTO Photo (photo_id, property_id, image_path)
+VALUES
+(201, 2, 'image185.jpeg'),
+(202, 2, 'image1458.jpeg'),
+(203, 2, 'image645.jpeg'),
+(301, 3, 'image987.jpeg'),
+(302, 3, 'image345.jpeg'),
+(303, 3, 'image728.jpeg'),
+(304, 3, 'image6492.jpeg');
+
+
+
+# TASK 3 - Data Manipulation (CREATE VIEW statements for the 3 mentioned queries)
+
+CREATE VIEW v_prop_info AS
+    SELECT 
+      Property.property_id,  
+      Property_Type.type_name AS property_type,  
+      Street.street_name,  
+      City.city_name,
+      Address.postal_code,  
+      Address.number,  
+      Owner.owner_id,  
+      Person.first_name AS owner_first_name,  
+      Person.last_name AS owner_last_name,  
+      Person.telephone AS owner_phone,  
+      Person.email AS owner_email
+    FROM Property
+    JOIN Property_Type ON Property.type_id = Property_Type.type_id
+    JOIN Address  ON Property.address_id = Address.address_id
+    JOIN Street ON Address.street_id = Street.street_id
+    JOIN City ON Street.city_id = City.city_id
+    JOIN Owner ON Property.owner_id = Owner.owner_id
+    JOIN Person ON Owner.owner_id = Person.person_id; 
+
+CREATE VIEW v_prop_details AS
+SELECT 
+  Property.property_id,  
+  Property_Type.type_name AS property_type,  
+  Street.street_name,  
+  Address.postal_code,  
+  Address.number,  
+  City.city_name,
+  Room.room_id,  
+  Room_Type.room_type,  
+  Room.width,  
+  Room.height,
+  IF(Room.room_id IS NOT NULL, (Room.width * Room.height), NULL) AS 'Area',
+  Furniture.furniture_name,
+  Room_Furniture.quantity
+FROM Property
+  INNER JOIN Property_Type ON Property.type_id = Property_Type.type_id
+  INNER JOIN Address ON Property.address_id = Address.address_id
+  INNER JOIN Street ON Address.street_id = Street.street_id
+  INNER JOIN City ON Street.city_id = City.city_id
+  LEFT JOIN Room ON Property.property_id = Room.property_id
+  LEFT JOIN Room_Type ON Room.room_type_id = Room_Type.room_type_id
+  LEFT JOIN Room_Furniture ON Room_Furniture.room_id = Room.room_id
+  LEFT JOIN Furniture ON Furniture.furniture_id = Room_Furniture.furniture_id;
+
+
+CREATE VIEW v_occupancy_history AS
+SELECT 
+  Property.property_id,  
+  Property_Type.type_name AS property_type,  
+  Tenant.tenant_id,  
+  Person.first_name AS tenant_first_name,  
+  Person.last_name AS tenant_last_name,  
+  Tenancy_Agreement.start_date,  
+  Tenancy_Agreement.end_date,
+  Tenancy_Agreement.rent_amount
+FROM Property
+LEFT JOIN Property_Type  ON Property.type_id = Property_Type.type_id
+LEFT JOIN Tenancy_Agreement ON Property.property_id = Tenancy_Agreement.property_id
+LEFT JOIN Tenant ON Tenancy_Agreement.tenant_id = Tenant.tenant_id
+LEFT JOIN Person ON Tenant.tenant_id = Person.person_id;
