@@ -237,11 +237,11 @@ INSERT INTO Country(country_name) VALUES
 ('Italy');
 
 INSERT INTO City(city_name, country_id) VALUES
-('Gothenburg', (SELECT country_id WHERE country_name = 'Sweden')),
-('Joinville', (SELECT country_id WHERE country_name = 'Brazil')),
-('Milan', (SELECT country_id WHERE country_name = 'Italy')),
-('Dallas', (SELECT country_id WHERE country_name = 'United States of America')),
-('Berlin', (SELECT country_id WHERE country_name = 'Sweden'));
+('Gothenburg', (SELECT country_id FROM Country WHERE country_name = 'Sweden')),
+('Joinville', (SELECT country_id FROM Country WHERE country_name = 'Brazil')),
+('Milan', (SELECT country_id FROM Country WHERE country_name = 'Italy')),
+('Dallas', (SELECT country_id FROM Country WHERE country_name = 'United States of America')),
+('Berlin', (SELECT country_id FROM Country WHERE country_name = 'Sweden'));
 
 INSERT INTO Street(street_name, city_id) VALUES
 ('Aschebergsgatan', (SELECT city_id FROM City WHERE city_name = 'Gothenburg')),
@@ -257,4 +257,11 @@ INSERT INTO Address(street_id, postal_code, number) VALUES
 ((SELECT street_id FROM Street WHERE street_name = 'Miles Rd'), '28034', '921'),
 ((SELECT street_id FROM Street WHERE street_name = 'Kurfürstendamm'), '10585', '276');
 
-
+INSERT INTO Person(first_name, last_name, document_number, telephone, email) VALUES
+('Lukas', 'Müller', '123456789001', '4915123456789', 'lukas.muller@example.de'),
+('Isabella', 'Rossi', '987654321002', '390612345678', 'isabella.rossi@example.it'),
+('Émile', 'Dubois', '456789123003', '33612345678', 'emile.dubois@example.fr'),
+('Sofia', 'Andersson', '321654987004', '46701234567', 'sofia.andersson@example.se'),      
+('Mateo', 'García', '654987321005', '34961234567', 'mateo.garcia@example.es'),
+('Anna', 'Nowak', '789123456006', '48123456789', 'anna.nowak@example.pl'),            
+('Pedro', 'Silva', '147258369007', '5521998765432', 'pedro.silva@example.com');
