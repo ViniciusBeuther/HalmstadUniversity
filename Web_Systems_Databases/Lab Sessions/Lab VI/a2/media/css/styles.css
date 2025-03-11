@@ -32,17 +32,18 @@ a{
   margin: 0;
   padding: 0;
   list-style-type: none;
-  background: #e7eee7;
+  background: #858885;
   overflow: hidden;
 }
 
 .navigation a{
   text-decoration: none;
-  border-bottom: 2px solid #87D68D;
   padding: 12px;
   display: block;
 }
-
+.navigation a.active{
+  background-color: #3aa125;
+}
 
 .container{
   width: 60%;
