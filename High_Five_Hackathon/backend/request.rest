@@ -1,0 +1,6 @@
+POST http://localhost:3001/animals/selectedPet
+Content-Type: application/json
+
+{
+  "user_id": 1
+}
