@@ -14,13 +14,20 @@ if (isset($_POST)) {
       Message: {$_POST["msg"]}
       <br>
   END;
+    $to = "vinbeu25@student.hh.se";
+    $subject = "Test-mail";
+    $msg = $_POST["msg"];
+    $headers = "FROM: " . $_POST["name"];
+    mail($to, $subject, $msg, $headers);
+    // $mysqli = new mysqli('serveraddress', 'username', 'password', 'databasename');
+    
 }
 echo $navigation;
 echo $content;
 ?>
 {/* these statements below are equivalent */}
-<?php 
+{/*<?php 
   $name = "vinicius";
 ?>
-
 <?= $name ?>
+  */}  
