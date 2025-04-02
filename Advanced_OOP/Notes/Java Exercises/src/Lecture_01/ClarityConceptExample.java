@@ -13,7 +13,7 @@ public class ClarityConceptExample {
 
         ListIterator<String> iterator = countries.listIterator();
         System.out.println(iterator.next());
-        
+
         while(iterator.hasNext()) {
             System.out.println(iterator.next());
         }

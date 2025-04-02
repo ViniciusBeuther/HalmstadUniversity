@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="/css/stylesheet.css">
 <?php 
+include('head.php');
 session_name('Website');
 session_start();
 $host = "localhost";
