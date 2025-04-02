@@ -9,16 +9,20 @@ $db = "vinbeu25";
 // $mysqli = new mysqli('localhost', 'vinbeu25', 'dmWG4RltMW', 'vinbeu25');
 $mysqli = new mysqli($host, $user, $pwd, $db);
 $navigation = <<<END
-    <nav>
+      <nav>
       <a href="index.php">Home</a>
       <a href="about.php">About</a>
       <a href="login.php">Log In</a>
-      <a href="register.php">Register</a>
-  END;
+      END;
+      if(!isset($_SESSION['userId'])){
+        $navigation .= <<<END
+        <a href="register.php">Register</a>
+        END;
+      }
 
   if(isset($_SESSION['userId'])){
     $navigation .= <<<END
-    <a href="logout.php">Products</a>
+    <a href="products.php">Products</a>
     <a href="add_product.php">Add product</a>
     <a href="logout.php">Logout</a>
     Logged in as {$_SESSION['username']}
