@@ -11,8 +11,8 @@ public class Stack {
 //  Constructor, it receives a list of integers as param
     public Stack( List<Integer> integers ){
         this.setElements(integers);
-        this.setTop( this.getElements().getLast() );
-        this.setBottom( this.getElements().getFirst() );
+        this.setTop( this.getElements().get(this.getElements().size()-1) );
+        this.setBottom( this.getElements().get(0) );
     }
 
     public Integer getBottom() {
@@ -46,7 +46,7 @@ public class Stack {
         for( int i=0; i<nElements; i++ ){
             updatedStack.add(newElementsArray.get(i));
             this.setElements(updatedStack);
-            this.setTop(updatedStack.getLast());
+            this.setTop(updatedStack.get(updatedStack.size() - 1));
         }
     }
 
@@ -60,12 +60,12 @@ public class Stack {
         }
 
         for( int i=0; i<n; i++ ){
-            removedElements.add(updatedList.remove(this.getElements().size()-1));
+            removedElements.add(updatedList.remove(this.getElements().size() - 1));
         }
 //        System.out.println("elements removed: " + removedElements);
 
         this.setElements( updatedList );
-        this.setTop( updatedList.getLast() );
+        this.setTop( updatedList.get(updatedList.size() - 1) );
 
         return removedElements;
     }

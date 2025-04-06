@@ -22,9 +22,9 @@ public class FindOutlier {
             }
         }
         if( odds.size() > 1 ){
-            return evens.getFirst();
+            return evens.get(0);
         } else{
-            return odds.getFirst();
+            return odds.get(0);
         }
     }
 }
