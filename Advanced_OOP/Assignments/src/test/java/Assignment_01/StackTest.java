@@ -1,5 +1,6 @@
 package Assignment_01;
 
+import Assignment_01.Question_07.Stack;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -34,6 +35,6 @@ class StackTest {
         myStack.push(elementsToInsert.size(), elementsToInsert);
 
         assertEquals(expectedResult, myStack.getElements());
-        
+
     }
 }

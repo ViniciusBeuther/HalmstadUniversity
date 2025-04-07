@@ -5,12 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0d76040a-d166-4535-af5b-75fa21362c92" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/Assignment_01/StackTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Notes/Java Exercises/src/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Assignment_01/Question_08/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Assignment_01/Stack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Assignment_01/Stack.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/LogicChallanges/FindOutlier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/LogicChallanges/FindOutlier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Assignment_01/Matrix.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Assignment_01/Question_05/Matrix.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Assignment_01/MatrixInteractive.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Assignment_01/Question_05/MatrixInteractive.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Assignment_01/Stack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Assignment_01/Question_07/Stack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Assignment_01/StackInteractive.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Assignment_01/Question_07/StackInteractive.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Assignment_01/StackTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Assignment_01/StackTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,8 +21,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="JUnit5 Test Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -41,7 +42,9 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.Main.executor": "Run",
     "Application.StackInteractive.executor": "Run",
+    "JUnit.StackTest.executor": "Run",
     "JUnit.StackTest.initialization.executor": "Run",
     "JUnit.StackTest.popElements.executor": "Run",
     "JUnit.StackTest.pushElements.executor": "Run",
@@ -67,13 +70,26 @@
       <recent name="Assignment_01" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.StackTest">
-    <configuration name="StackInteractive" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Assignment_01.StackInteractive" />
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Assignment_01.Question_08.Main" />
       <module name="Assignments" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Assignment_01.*" />
+          <option name="PATTERN" value="Assignment_01.Question_08.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StackInteractive" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Assignment_01.Question_07.StackInteractive" />
+      <module name="Assignments" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Assignment_01.Question_05.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -85,7 +101,7 @@
       <module name="Assignments" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Assignment_01.*" />
+          <option name="PATTERN" value="Assignment_01.Question_05.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -96,27 +112,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StackTest.initialization" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Assignments" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Assignment_01.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Assignment_01" />
-      <option name="MAIN_CLASS_NAME" value="Assignment_01.StackTest" />
-      <option name="METHOD_NAME" value="initialization" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="StackTest.popElements" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Assignments" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Assignment_01.*" />
+          <option name="PATTERN" value="Assignment_01.Question_05.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -132,7 +132,7 @@
       <module name="Assignments" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Assignment_01.*" />
+          <option name="PATTERN" value="Assignment_01.Question_05.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -146,11 +146,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.StackTest" />
         <item itemvalue="JUnit.StackTest.pushElements" />
         <item itemvalue="JUnit.StackTest.popElements" />
         <item itemvalue="Application.StackInteractive" />
-        <item itemvalue="JUnit.StackTest.initialization" />
       </list>
     </recent_temporary>
   </component>

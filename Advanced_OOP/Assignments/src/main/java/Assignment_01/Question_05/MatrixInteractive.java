@@ -1,4 +1,4 @@
-package Assignment_01;
+package Assignment_01.Question_05;
 
 public class MatrixInteractive {
     public static void main(String[] args){
