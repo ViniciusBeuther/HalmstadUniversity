@@ -5,13 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0d76040a-d166-4535-af5b-75fa21362c92" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Assignment_01/Question_08/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Assignment_01/Question_14/Filter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Assignment_01/Question_14/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Assignment_01/Question_14/ShortStringFilter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Assignment_01/Matrix.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Assignment_01/Question_05/Matrix.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Assignment_01/MatrixInteractive.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Assignment_01/Question_05/MatrixInteractive.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Assignment_01/Stack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Assignment_01/Question_07/Stack.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Assignment_01/StackInteractive.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Assignment_01/Question_07/StackInteractive.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Assignment_01/StackTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Assignment_01/StackTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +19,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JUnit5 Test Class" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -42,6 +40,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.Assignment_01.Question_14.Main.executor": "Run",
     "Application.Main.executor": "Run",
     "Application.StackInteractive.executor": "Run",
     "JUnit.StackTest.executor": "Run",
@@ -70,7 +69,7 @@
       <recent name="Assignment_01" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Assignment_01.Question_08.Main" />
       <module name="Assignments" />
