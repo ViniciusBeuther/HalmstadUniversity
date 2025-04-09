@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root{
+  --primary: #beb7a4;
+  --secondary: #000000;
+  --secondary_hover: #2c2c2c;
+  --tertiary: #fffffc;
+}
+/* Root styles and page fitting */
+*{
+  padding: 0;
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+}
+
+html{
+  height: 100vh;
+  background-color: var(--primary);
+  font-weight: normal;
+  font-style: normal;
+}
+
+body{
+  max-width: 25%;
+  width: 100%;
+  margin: auto; 
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} 
+
+/* Login container and Form Styles */
+form#login__form, form#login__register_form, article#login__form_container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .25rem;
+  width: 80%;
+}
+
+/* Styles inside of the form */
+article#login__form_container{
+  background-color: var(--tertiary);
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+  width: 100%;
+  h1{
+    color: var(--secondary);
+  }
+  
+  p{
+    margin-bottom: 10px;
+  }
+  
+  a{
+    color: var(--secondary);
+  }
+
+  a:hover{
+    color: #3fc2ee;
+  }
+
+  input{
+    outline: none;
+    border: 1px solid lightgray;
+    width: 100%;
+    padding: .75rem .5rem;
+    border-radius: .25rem;
+  }
+  #login__loginBtn, #login__registerBtn{
+    width: 25%;
+    background-color: var(--secondary);
+    color: var(--tertiary);
+    padding: 5px 0px;
+    margin-top: 15px;
+  }
+  #login__loginBtn:hover, #login__registerBtn:hover{
+    background-color: var(--secondary_hover);
+    cursor: pointer;
+  }
+}
+
+/* Styling Register Role Selector */
+select {
+  width: 105%;
+  background-color: #3fc2ee;
+  padding: 0.75rem 0.5rem; 
+  box-sizing: border-box; 
+  border: 1px solid lightgray;
+  border-radius: 0.25rem;
+  outline: none;
+  background-color: var(--tertiary);
+  color: var(--secondary);
+  appearance: none; 
+  cursor: pointer;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1rem;
+  padding-right: 2rem;
+}
+
+/* Hover effect */
+article#login__form_container select:hover {
+  border-color: var(--secondary);
+}
+
+/* focus effect */
+article#login__form_container select:focus {
+  border-color: var(--secondary);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Styling options inside select */
+article#login__form_container select option {
+  background-color: var(--tertiary);
+  color: var(--secondary);
+}
