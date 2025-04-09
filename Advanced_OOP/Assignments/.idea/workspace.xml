@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0d76040a-d166-4535-af5b-75fa21362c92" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Assignment_01/Question_14/Filter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Assignment_01/Question_14/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Assignment_01/Question_14/ShortStringFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Assignment_01/Question_15/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -41,6 +39,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.Assignment_01.Question_14.Main.executor": "Run",
+    "Application.Assignment_01.Question_15.Main.executor": "Run",
     "Application.Main.executor": "Run",
     "Application.StackInteractive.executor": "Run",
     "JUnit.StackTest.executor": "Run",
@@ -70,12 +69,12 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Assignment_01.Question_08.Main" />
+    <configuration name="Assignment_01.Question_15.Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Assignment_01.Question_15.Main" />
       <module name="Assignments" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Assignment_01.Question_08.*" />
+          <option name="PATTERN" value="Assignment_01.Question_15.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -83,12 +82,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StackInteractive" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Assignment_01.Question_07.StackInteractive" />
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Assignment_01.Question_08.Main" />
       <module name="Assignments" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Assignment_01.Question_05.*" />
+          <option name="PATTERN" value="Assignment_01.Question_08.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -145,11 +144,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Assignment_01.Question_15.Main" />
         <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.StackTest" />
         <item itemvalue="JUnit.StackTest.pushElements" />
         <item itemvalue="JUnit.StackTest.popElements" />
-        <item itemvalue="Application.StackInteractive" />
       </list>
     </recent_temporary>
   </component>
