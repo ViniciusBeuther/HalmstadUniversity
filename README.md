@@ -5,7 +5,7 @@ Welcome to the repository for my semester at **Halmstad University, Sweden**. Th
 ![image](https://github.com/user-attachments/assets/152ac1c2-130b-4da4-a075-62765c3969b5)
 ---
 
-## 🏫 Subjects  
+## 🏫 Courses  
 ### 1. Databases  
 - Focus: Database design, implementation, optimization, and advanced SQL.  
 - Materials: Lecture notes, database schemas, SQL queries, and project documentation.
