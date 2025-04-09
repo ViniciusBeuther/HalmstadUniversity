@@ -8,19 +8,23 @@ Welcome to the repository for my semester at **Halmstad University, Sweden**. Th
 ## 🏫 Subjects  
 ### 1. Databases  
 - Focus: Database design, implementation, optimization, and advanced SQL.  
-- Materials: Lecture notes, database schemas, SQL queries, and project documentation.  
+- Materials: Lecture notes, database schemas, SQL queries, and project documentation.
+- Technologies: MySQL and SQLite3.
 
 ### 2. Mathematics for Machine Learning  
 - Focus: Linear algebra, probability, statistics, and optimization techniques applied in machine learning.  
-- Materials: Notes, solved exercises, Python notebooks, and practical implementations.  
+- Materials: Notes, solved exercises, Python notebooks, and practical implementations.
+- Technologies: Python (Matplot lib, Numpy).
 
 ### 3. Advanced Object-Oriented Programming (Java)  
 - Focus: Advanced Java programming concepts, including design patterns, multithreading, and software architecture.  
-- Materials: Java code examples, UML diagrams, project files, and assignments.  
+- Materials: Java code examples, UML diagrams, project files, and assignments.
+- Technologies: Java, JUnit5.
 
 ### 4. Web Systems and Databases  
-- Focus: Building modern web applications integrated with databases, exploring backend and frontend development.  
-- Materials: Web application source code, backend APIs, and database integration examples.  
+- Focus: Building modern web applications integrated with databases, exploring backend and frontend development.
+- Materials: Web application source code, backend APIs, and database integration examples.
+- Technologies: PHP, HTML, CSS, JavaScript, APACHE, MySQL.  
 
 ---
 
