@@ -5,7 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0d76040a-d166-4535-af5b-75fa21362c92" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Assignment_01/Question_15/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Assignment_01/Question_09/Message.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Assignment_01/Question_09/Stack.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Assignment_01/Question_09/StackInteractive.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -53,12 +55,13 @@
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/viniciusbeuther/Documents/University/UDESC/HalmstadUniversity/Advanced_OOP/Assignments/src/main/java",
+    "last_opened_file_path": "/Users/viniciusbeuther/Documents/University/UDESC/HalmstadUniversity/Advanced_OOP/Assignments/src/main/java/Assignment_01/Question_09",
     "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java/Assignment_01/Question_09" />
       <recent name="$PROJECT_DIR$/src/main/java" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
@@ -66,6 +69,9 @@
     </key>
     <key name="CreateTestDialog.RecentsKey">
       <recent name="Assignment_01" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="Assignment_01.Question_09" />
     </key>
   </component>
   <component name="RunManager">

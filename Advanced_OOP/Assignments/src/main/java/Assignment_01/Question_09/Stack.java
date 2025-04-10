@@ -1,47 +1,47 @@
-package Assignment_01.Question_07;
+package Assignment_01.Question_09;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Stack {
-    private Integer bottom;
-    private Integer top;
-    private List<Integer> elements;
+    private Message bottom;
+    private Message top;
+    private List<Message> elements;
 
 //  Constructor, it receives a list of integers as param
-    public Stack( List<Integer> integers ){
-        this.setElements(integers);
+    public Stack( List<Message> messages ){
+        this.setElements(messages);
         this.setTop( this.getElements().get(this.getElements().size()-1) );
         this.setBottom( this.getElements().get(0) );
     }
 
-    public Integer getBottom() {
+    public Message getBottom() {
         return bottom;
     }
 
-    public void setBottom(Integer bottom) {
+    public void setBottom(Message bottom) {
         this.bottom = bottom;
     }
 
-    public Integer getTop() {
+    public Message getTop() {
         return top;
     }
 
-    public void setTop(Integer top) {
+    public void setTop(Message top) {
         this.top = top;
     }
 
-    public List<Integer> getElements() {
+    public List<Message> getElements() {
         return elements;
     }
 
-    public void setElements(List<Integer> elements) {
+    public void setElements(List<Message> elements) {
         this.elements = elements;
     }
 
 //  add elements to the stack (@params: number of elements to be inserted, array of new elements)
-    public void push( int nElements, List<Integer> newElementsArray ){
-        ArrayList<Integer> updatedStack = new ArrayList<>(this.getElements());
+    public void push( int nElements, List<Message> newElementsArray ){
+        ArrayList<Message> updatedStack = new ArrayList<>(this.getElements());
 
         for( int i=0; i<nElements; i++ ){
             updatedStack.add(newElementsArray.get(i));
@@ -51,9 +51,9 @@ public class Stack {
     }
 
 //  Pop n values
-    public ArrayList<Integer> pop( int n ){
-        List<Integer> updatedList = this.getElements();
-        ArrayList<Integer> removedElements = new ArrayList<>();
+    public ArrayList<Message> pop( int n ){
+        List<Message> updatedList = this.getElements();
+        ArrayList<Message> removedElements = new ArrayList<>();
 
         if( n > this.getElements().size() ){
             throw new IndexOutOfBoundsException("Tried to remove more elements than the list has.");
