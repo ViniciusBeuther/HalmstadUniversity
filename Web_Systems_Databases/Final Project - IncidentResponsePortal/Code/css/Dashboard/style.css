@@ -1,0 +1,94 @@
+@import url(../../css/global.css);
+body{
+    height: 100%;
+    margin: auto;
+    max-width: 85%;
+    width: 100%;
+    background-color: var(--tertiary);
+}
+html{
+    background-color: var(--tertiary);
+}
+
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+    width: 100%;
+}
+
+.header__profile_icon{
+    width: 2rem;
+    height: 2rem;
+    background-color: var(--primary);
+    padding: 5px;
+    border-radius: 100%;
+}
+
+.header__article{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.primary_button{
+    background-color: var(--secondary);
+    padding: 10px;
+    outline: none;
+    border-radius: .5rem;
+    border: none;
+    color: var(--tertiary);
+}
+
+.primary_button:hover{
+    cursor: pointer;
+    background-color: var(--secondary_hover);
+}
+
+div.dashboardContainer {
+    border: 1px solid red;
+    height: 90%;
+    display: flex;
+}
+
+header{
+    height: 7%;
+}
+
+aside {
+    border: 1px solid blue;
+    width: 20%;
+    background-color: yellow;
+}
+
+article.dashboardElementsContainer {
+    gap: 10px;
+    border: 1px solid orange;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+}
+
+section{
+    background-color: green;
+}
+
+section.dashboardElement_01 {
+    grid-area: 1 / 1 / 2 / 2;
+}
+
+section.dashboardElement_02 {
+    grid-area: 1 / 2 / 2 / 3;
+}
+
+section.dashboardElement_03 {
+    grid-area: 2 / 1 / 3 / 2;
+}
+
+section.dashboardElement_04 {
+    grid-area: 2 / 2 / 3 / 3;
+}
