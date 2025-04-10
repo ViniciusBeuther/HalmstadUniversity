@@ -2,7 +2,7 @@
 
 define('DB_SERVER', 'localhost');
 define('DB_USERNAME', 'vinbeu25');
-define('DB_PASSWORD', 'dmWG4RltMW');
+define('DB_PASSWORD', '#####');
 define('DB_NAME', 'vinbeu25');
 
 try{
