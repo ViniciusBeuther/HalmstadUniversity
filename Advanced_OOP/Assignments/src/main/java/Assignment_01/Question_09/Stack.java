@@ -69,4 +69,9 @@ public class Stack {
 
         return removedElements;
     }
+
+//  Returns how many messages there are in the stack
+    public Integer size(){
+        return this.getElements().size();
+    }
 }

@@ -18,6 +18,9 @@ public class StackInteractive {
 //      Create a Stack instance
         Stack myStack = new Stack( elements );
 
+//      Show initial size
+        System.out.println("Current stack size (messages): " + myStack.size());
+
 //      Showing original stack
         System.out.println("Full stack before insertion: " + myStack.getElements());
 
@@ -34,5 +37,9 @@ public class StackInteractive {
 //      Show current stack's top/bottom
         System.out.println("Top element:" + myStack.getTop());
         System.out.println("Bottom element:" + myStack.getBottom());
+
+//      Show current stack's top/bottom
+        System.out.println("Current stack size (messages): " + myStack.size());
+
     }
 }

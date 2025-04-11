@@ -1,52 +1,86 @@
 <?php
-    session_start();
+session_start();
+
+if(!isset($_SESSION['username'])) {
+    header("Location: /project/index.php");
+    exit;
+}
+
+if($_SERVER["REQUEST_METHOD"] == 'POST' && isset($_POST['logout'])) {
+    $_SESSION = [];
+    session_destroy();
+    header("Location: /project/index.php");
+    exit;
+}
+
+
+$valid_sections = ['initial', 'report', 'view', 'settings', 'users'];
+$current_section = isset($_GET['section']) && in_array($_GET['section'], $valid_sections) 
+    ? $_GET['section'] 
+    : 'initial';
+
+
+$section_file = "../../sections/{$current_section}.php";
+if(file_exists($section_file)) {
+    ob_start();
+    include $section_file;
+    $section_content = ob_get_clean();
+} else {
+    $section_content = "<p>Section not found</p>";
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../css/global.css">
-    <link rel="stylesheet" href="../../css/Dashboard/style.css">
-    <title>Dashboard</title>
+    <link rel="stylesheet" href="/project/css/global.css">
+    <link rel="stylesheet" href="/project/css/Dashboard/style.css">
+    <title>Dashboard - <?= ucfirst($current_section) ?></title>
     <style>
-
+        .header__signout_icon {
+            width: 16px;
+            height: 16px;
+        }
+        .primary_button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        .sectionContainer {
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+        }
+        .sidebar-nav li.active {
+            background-color: var(--primary);
+        }
+        .sidebar-nav li.active a {
+            color: var(--tertiary);
+            font-weight: bold;
+        }
+        .sidebar-nav a {
+            display: block;
+            padding: 10px;
+            color: var(--secondary);
+            text-decoration: none;
+        }
+        .sidebar-nav a:hover {
+            background-color: var(--primary-light);
+        }
     </style>
 </head>
-
 <body>
-    <?php 
-        $header = <<<END
-            <header class="header">
-                <span>
-                    <h1>Incident Report Portal</h1>
-                </span>
-                <article class="header__article">
-                    <button class="primary_button">Sign out</button>
-                    <p>{$_SESSION['username']}</p>
-                    <img src="../../assets/user_profile_icon.svg" alt="user_profile_icon" class="header__profile_icon">
-                </article>
-            </header>
-        END;
-        echo $header;
-    ?>
-
+    <?php require_once('../../templates/header.php'); ?>
+    
     <div class="dashboardContainer">
-        <aside class="asideBar">
-            <h2>Dashboard</h2>
-            <p>Report Incident</p>
-            <p>View Incident</p>
-            <p>Settings</p>
-            <p>Users Management</p>
-        </aside>
-        <article class="dashboardElementsContainer">
-            <section class="dashboardElement_01">Chart 01</section>
-            <section class="dashboardElement_02">Chart 02</section>
-            <section class="dashboardElement_03">Information 03</section>
-            <section class="dashboardElement_04">User data</section>
+        <?php require_once('../../templates/sidebar.php'); ?>
+        
+        <article class="sectionContainer">        
+            <?= $section_content ?>
         </article>
     </div>
 </body>
-
 </html>
