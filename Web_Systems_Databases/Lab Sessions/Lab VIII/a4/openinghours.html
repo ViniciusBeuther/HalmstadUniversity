@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alice's shop</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+  <link rel="stylesheet" href="/media/css/styles.css" />
+</head>
+
+<body>
+  <div class="container">
+    <nav class="nav nav-pills">
+      <ul>
+        <li class="nav-item"><a href="./index.html" class="nav-link">Home</a></li>
+        <li class="nav-item"><a href="./openinghours.html" class="nav-link active">Opening Hours</a></li>
+        <li class="nav-item"><a href="./products.html" class="nav-link">Products</a></li>
+      </ul>
+    </nav>
+
+    <div class="content">
+      <div class="column">
+        <div>
+          <h1>Opening Hours</h1>
+        </div>
+        <div>
+          <p>Welcome to my shop. We are open the following hours:</p>
+        </div>
+      </div>
+      <div class="column">
+        <dl class="list-group">
+          <li class="list-group-item" id="open-weekday">
+            <dt>Mondays-Thursdays</dt>
+            <dd>08.00-16.00</dd>
+          </li>
+          <li class="list-group-item" id="open-friday">
+            <dt>Friday</dt>
+            <dd>08.00-14.00</dd>
+          </li>
+          <li class="list-group-item" id="open-weekend">
+            <dt>Saturdays-Sundays</dt>
+            <dd>Closed</dd>
+          </li>
+        </dl>
+        <div style="clear: both;"></div>
+      </div>
+      <div style="clear: both;"></div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    function isOpen(hour, minute){
+      return hour > 16 || hour < 8 ? false : (weekDayNr == 5 ? (hour > 14 ? false : true) : true);
+    }
+    
+    function activate(id) {
+      const minute = dateObject.getMinutes();
+      // const hour = dateObject.getHours();
+      const hour = 12;
+
+
+      weekDayNr == 6 || weekDayNr == 0 
+        ? alert('Store is closed today! Please visit us on a week day.') 
+        : (isOpen(hour, minute) ? document.getElementById(id).className += " active" : alert('We\'re closed for the day.'));
+    }
+
+    const daysClosed = [6, 0];
+    let dateObject = new Date();
+    let weekDayNr = dateObject.getDay();
+    //alert("Week day nr: " + weekDayNr);
+    if (weekDayNr == 6 || weekDayNr == 0) // Sat = 6, Sun = 0
+    {
+      activate("open-weekend");
+    } else if (weekDayNr == 5) // Friday = 5
+    {
+      activate("open-friday");
+    } else { // Other days
+      activate("open-weekday");
+    }
+  </script>
+</body>
+
+</html>
