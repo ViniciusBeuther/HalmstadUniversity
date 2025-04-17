@@ -4,7 +4,7 @@ import java.io.File;
 
 import javax.swing.JComponent;
 
-public class SlideShow extends Presenter {
+public class SlideShow extends presenter.Presenter {
 
 	private JComponent pictureComponent = null;
 	
