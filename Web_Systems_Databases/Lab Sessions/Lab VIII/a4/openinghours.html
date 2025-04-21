@@ -30,55 +30,27 @@
         </div>
       </div>
       <div class="column">
-        <dl class="list-group">
+        <ul class="list-group">
           <li class="list-group-item" id="open-weekday">
-            <dt>Mondays-Thursdays</dt>
-            <dd>08.00-16.00</dd>
+            <p>Mondays-Thursdays</p>
+            <p>08.00-16.00</p>
           </li>
           <li class="list-group-item" id="open-friday">
-            <dt>Friday</dt>
-            <dd>08.00-14.00</dd>
+            <p>Friday</p>
+            <p>08.00-14.00</p>
           </li>
           <li class="list-group-item" id="open-weekend">
-            <dt>Saturdays-Sundays</dt>
-            <dd>Closed</dd>
+            <p>Saturdays-Sundays</p>
+            <p>Closed</p>
           </li>
-        </dl>
-        <div style="clear: both;"></div>
+        </ul>
       </div>
-      <div style="clear: both;"></div>
     </div>
   </div>
-  <script type="text/javascript">
-    function isOpen(hour, minute){
-      return hour > 16 || hour < 8 ? false : (weekDayNr == 5 ? (hour > 14 ? false : true) : true);
-    }
-    
-    function activate(id) {
-      const minute = dateObject.getMinutes();
-      // const hour = dateObject.getHours();
-      const hour = 12;
-
-
-      weekDayNr == 6 || weekDayNr == 0 
-        ? alert('Store is closed today! Please visit us on a week day.') 
-        : (isOpen(hour, minute) ? document.getElementById(id).className += " active" : alert('We\'re closed for the day.'));
-    }
-
-    const daysClosed = [6, 0];
-    let dateObject = new Date();
-    let weekDayNr = dateObject.getDay();
-    //alert("Week day nr: " + weekDayNr);
-    if (weekDayNr == 6 || weekDayNr == 0) // Sat = 6, Sun = 0
-    {
-      activate("open-weekend");
-    } else if (weekDayNr == 5) // Friday = 5
-    {
-      activate("open-friday");
-    } else { // Other days
-      activate("open-weekday");
-    }
-  </script>
+<script src="./openinghours.js"></script>
+<script>
+	console.log('loading script');
+</script>
 </body>
 
 </html>
