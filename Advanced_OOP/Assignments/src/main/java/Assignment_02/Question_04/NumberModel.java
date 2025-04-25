@@ -4,13 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NumberModel {
+
+    // Initialize variables and observers
     private List<Double> numbers;
     private List<ModelObserver> observers;
 
+    // constructor, it receives a standard size (number of bars/inputs)
     public NumberModel(int size){
         numbers = new ArrayList<>();
         observers = new ArrayList<>();
 
+        // Initialize all values as 0.0
         for(int i=0; i < size; i++){
             numbers.add(0.0);
         }

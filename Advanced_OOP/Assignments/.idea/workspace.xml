@@ -5,12 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0d76040a-d166-4535-af5b-75fa21362c92" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Assignment_02/Question_04/GraphView.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Assignment_02/Question_04/ModelObserver.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Assignment_02/Question_04/NumberModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Assignment_02/Question_04/NumberView.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Assignment_02/Question_04/ObserverGraph.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Assignment_02/Question_08/Filter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Assignment_02/Question_08/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Assignment_02/Question_08/ShortStringFilter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Assignment_02/Question_04/GraphView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Assignment_02/Question_04/GraphView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Assignment_02/Question_04/ModelObserver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Assignment_02/Question_04/ModelObserver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Assignment_02/Question_04/NumberModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Assignment_02/Question_04/NumberModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Assignment_02/Question_04/NumberView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Assignment_02/Question_04/NumberView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Assignment_02/Question_04/ObserverGraph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Assignment_02/Question_04/ObserverGraph.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,6 +48,7 @@
     "Application.Assignment_01.Question_14.Main.executor": "Run",
     "Application.Assignment_01.Question_15.Main.executor": "Run",
     "Application.Assignment_02.Question_01.Main.executor": "Run",
+    "Application.Assignment_02.Question_08.Main.executor": "Run",
     "Application.Main.executor": "Run",
     "Application.MatrixInteractive.executor": "Run",
     "Application.ObserverGraph.executor": "Run",
@@ -60,12 +64,13 @@
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/viniciusbeuther/Documents/University/UDESC/HalmstadUniversity/Advanced_OOP/Assignments/src/main/java/Assignment_01/Question_09",
+    "last_opened_file_path": "/Users/viniciusbeuther/Documents/University/UDESC/HalmstadUniversity/Advanced_OOP/Assignments/src/main/java/Assignment_02/Question_08",
     "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java/Assignment_02/Question_08" />
       <recent name="$PROJECT_DIR$/src/main/java/Assignment_01/Question_09" />
       <recent name="$PROJECT_DIR$/src/main/java" />
     </key>
@@ -79,13 +84,26 @@
       <recent name="Assignment_01.Question_09" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ObserverGraph">
+  <component name="RunManager" selected="Application.Assignment_02.Question_08.Main">
     <configuration name="Assignment_01.Question_15.Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Assignment_01.Question_15.Main" />
       <module name="Assignments" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="Assignment_01.Question_15.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Assignment_02.Question_08.Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Assignment_02.Question_08.Main" />
+      <module name="Assignments" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Assignment_02.Question_08.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -134,29 +152,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StackTest.pushElements" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Assignments" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Assignment_01.Question_05.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Assignment_01" />
-      <option name="MAIN_CLASS_NAME" value="Assignment_01.StackTest" />
-      <option name="METHOD_NAME" value="pushElements" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Assignment_02.Question_08.Main" />
         <item itemvalue="Application.ObserverGraph" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.Assignment_01.Question_15.Main" />
         <item itemvalue="JUnit.StackTest" />
-        <item itemvalue="JUnit.StackTest.pushElements" />
       </list>
     </recent_temporary>
   </component>
