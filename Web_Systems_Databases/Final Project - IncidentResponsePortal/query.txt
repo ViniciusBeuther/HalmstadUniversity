@@ -1,0 +1,181 @@
+
+CREATE TABLE IF NOT EXISTS Affected_Asset(
+	affected_asset_id INT NOT NULL AUTO_INCREMENT,
+	affected_asset_name VARCHAR(30) NOT NULL UNIQUE,
+	PRIMARY KEY(affected_asset_id, affected_asset_name)
+);
+
+CREATE TABLE IF NOT EXISTS Severity(
+	severity_id INT NOT NULL AUTO_INCREMENT,
+	severity_name VARCHAR(30) NOT NULL UNIQUE,
+	PRIMARY KEY(severity_id, severity_name)
+);
+
+CREATE TABLE IF NOT EXISTS Incident_Type(
+	incident_type_id INT NOT NULL AUTO_INCREMENT UNIQUE,
+	incident_name VARCHAR(30) NOT NULL UNIQUE,
+	PRIMARY KEY(incident_type_id, incident_name)
+);
+
+CREATE TABLE IF NOT EXISTS Incident_Status(
+	incident_status_id INT NOT NULL AUTO_INCREMENT,
+	incident_status VARCHAR(30) NOT NULL UNIQUE,
+	PRIMARY KEY(incident_status_id)
+);
+
+CREATE TABLE IF NOT EXISTS Permission(
+	permission_id INT NOT NULL AUTO_INCREMENT,
+	permission_name VARCHAR(30) NOT NULL UNIQUE,
+	PRIMARY KEY(permission_id, permission_name)
+);
+
+CREATE TABLE IF NOT EXISTS Role(
+	role_id INT NOT NULL AUTO_INCREMENT,
+	role_name VARCHAR(30) NOT NULL UNIQUE,
+	PRIMARY KEY(role_id)
+);
+
+CREATE TABLE IF NOT EXISTS Role_Permission(
+	permission_id INT NOT NULL,
+	role_id INT NOT NULL,
+	FOREIGN KEY(role_id) REFERENCES Role(role_id)
+		ON UPDATE CASCADE
+		ON DELETE RESTRICT,
+	FOREIGN KEY(permission_id) REFERENCES Permission(permission_id)
+		ON UPDATE CASCADE
+		ON DELETE RESTRICT,
+	PRIMARY KEY(permission_id, role_id)
+);
+
+CREATE TABLE IF NOT EXISTS Portal_Users(
+	user_id INT NOT NULL AUTO_INCREMENT,
+	email VARCHAR(50) NOT NULL,
+	username VARCHAR(50) NOT NULL UNIQUE,
+	password VARCHAR(50) NOT NULL,
+	role_id INT NOT NULL,
+	FOREIGN KEY(role_id) REFERENCES Role(role_id)
+		ON DELETE RESTRICT
+		ON UPDATE CASCADE,
+	PRIMARY KEY(user_id)
+);
+
+CREATE TABLE IF NOT EXISTS Web_Browser(
+	web_browser_id INT NOT NULL AUTO_INCREMENT,
+	web_browser VARCHAR(30) NOT NULL UNIQUE,
+	PRIMARY KEY(web_browser_id)
+);
+
+CREATE TABLE IF NOT EXISTS Page(
+	page_id INT NOT NULL AUTO_INCREMENT,
+	page_name VARCHAR(30) NOT NULL UNIQUE,
+	PRIMARY KEY(page_id, page_name)
+);
+
+CREATE TABLE IF NOT EXISTS Access_Log(
+	access_log_id INT NOT NULL AUTO_INCREMENT,
+	ip_address VARCHAR(50) NOT NULL,
+	web_browser_id INT NOT NULL,
+	page_id INT NOT NULL,
+	FOREIGN KEY(web_browser_id) REFERENCES Web_Browser(web_browser_id)
+		ON DELETE RESTRICT
+		ON UPDATE CASCADE,
+	FOREIGN KEY(page_id) REFERENCES Page(page_id)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE,
+	access_timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY(access_log_id)
+);
+
+CREATE TABLE IF NOT EXISTS User_Access_Log(
+	user_id INT NOT NULL,
+	access_log_id INT NOT NULL,
+	FOREIGN KEY(access_log_id) REFERENCES Access_Log(access_log_id)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE,
+	FOREIGN KEY(user_id) REFERENCES Portal_Users(user_id)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE,
+	PRIMARY KEY(user_id, access_log_id)
+);
+
+CREATE TABLE IF NOT EXISTS Incident_Reported(
+	incident_report_id INT NOT NULL AUTO_INCREMENT,
+	incident_type_id INT NOT NULL,
+	reported_by_id INT NOT NULL,
+	incident_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	incident_status_id INT NOT NULL,
+	severity_id INT NOT NULL,
+	FOREIGN KEY(incident_status_id) REFERENCES Incident_Status(incident_status_id)
+		ON DELETE RESTRICT
+		ON UPDATE CASCADE,
+	FOREIGN KEY(incident_type_id) REFERENCES Incident_Type(incident_type_id)
+		ON DELETE RESTRICT
+		ON UPDATE CASCADE,
+	FOREIGN KEY(reported_by_id) REFERENCES Portal_Users(user_id)
+		ON DELETE RESTRICT
+		ON UPDATE CASCADE,
+	FOREIGN KEY(severity_id) REFERENCES Severity(severity_id)
+		ON DELETE RESTRICT
+		ON UPDATE CASCADE,
+	PRIMARY KEY(incident_report_id)
+);
+
+CREATE TABLE IF NOT EXISTS Affected_Asset_Reported(
+	affected_asset_id INT NOT NULL,
+	incident_report_id INT NOT NULL,
+	FOREIGN KEY(affected_asset_id) REFERENCES Affected_Asset(affected_asset_id)
+		ON DELETE RESTRICT
+		ON UPDATE CASCADE,
+	FOREIGN KEY(incident_report_id) REFERENCES Incident_Reported(incident_report_id)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE,
+	PRIMARY KEY(affected_asset_id, incident_report_id)
+);
+
+CREATE TABLE IF NOT EXISTS Incident_Solved(
+	incident_solved_id INT NOT NULL AUTO_INCREMENT,
+	incident_report_id INT NOT NULL,
+	solver_id INT NOT NULL,
+	FOREIGN KEY(incident_report_id) REFERENCES Incident_Reported(incident_report_id)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE,
+	FOREIGN KEY(solver_id) REFERENCES Portal_Users(user_id)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE,
+	solved_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY(incident_solved_id)
+);
+
+CREATE TABLE IF NOT EXISTS Incident_Reported_Logs(
+	log_id INT NOT NULL AUTO_INCREMENT,
+	incident_report_id INT NOT NULL,
+	FOREIGN KEY(incident_report_id) REFERENCES Incident_Reported(incident_report_id)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE,
+	PRIMARY KEY(log_id, incident_report_id)
+);
+
+CREATE TABLE IF NOT EXISTS Comment(
+	comment_id INT NOT NULL AUTO_INCREMENT,
+	author_id INT NOT NULL,
+	incident_report_id INT NOT NULL,
+	comment_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	FOREIGN KEY(author_id) REFERENCES Portal_Users(user_id)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE,
+	FOREIGN KEY(incident_report_id) REFERENCES Incident_Reported(incident_report_id)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE,
+	PRIMARY KEY(comment_id)
+);
+
+CREATE TABLE IF NOT EXISTS Evidence(
+	evidence_id INT NOT NULL AUTO_INCREMENT,
+	incident_report_id INT NOT NULL,
+	file_path VARCHAR(500) NOT NULL UNIQUE,
+	evidence_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	FOREIGN KEY(incident_report_id) REFERENCES Incident_Reported(incident_report_id)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE,
+	PRIMARY KEY(evidence_id)
+);
