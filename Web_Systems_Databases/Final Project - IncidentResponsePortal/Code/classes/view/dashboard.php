@@ -14,7 +14,7 @@ if($_SERVER["REQUEST_METHOD"] == 'POST' && isset($_POST['logout'])) {
 }
 
 
-$valid_sections = ['initial', 'report', 'view', 'settings', 'users'];
+$valid_sections = ['initial', 'report', 'view', 'settings', 'users', 'logs', 'statistics'];
 $current_section = isset($_GET['section']) && in_array($_GET['section'], $valid_sections) 
     ? $_GET['section'] 
     : 'initial';
