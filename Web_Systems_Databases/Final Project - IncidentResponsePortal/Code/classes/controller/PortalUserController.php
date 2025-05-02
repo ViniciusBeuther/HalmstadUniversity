@@ -36,6 +36,14 @@ class PortalUserController{
 
         return $users;
     }
+
+    public function deleteUser($user_id){
+        if($user_id == null || $user_id < 0 || !is_numeric($user_id)) return false; 
+        
+        $success = $this->userModel->deleteUser($user_id);
+
+        if($success) return true;
+    }
 }
 
 ?>

@@ -1,1 +1,0 @@
-<h1>Report Incident</h1>
