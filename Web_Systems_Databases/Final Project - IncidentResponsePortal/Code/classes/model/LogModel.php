@@ -31,7 +31,7 @@
          */
         public function getAllLogs() {
             $stmt = $this->db->prepare("
-                SELECT al.access_log_id, pu.username, al.ip_address, wb.web_browser, p.page_name, al.access_timestamp
+                SELECT al.access_log_id, pu.user_id, pu.username, al.ip_address, wb.web_browser, p.page_name, al.access_timestamp
                 FROM Access_Log al
                 LEFT JOIN Web_Browser wb ON al.web_browser_id = wb.web_browser_id
                 LEFT JOIN Page p ON al.page_id = p.page_id
@@ -44,6 +44,33 @@
             $logs = $result->fetch_all(MYSQLI_ASSOC);
             $stmt->close();
             return $logs;
+        }
+
+        /**
+         * Used to get the statistics from database and show it in website statistics for the most accessed pages
+         * @param: none
+         * @return array[]
+         */
+        public function getAccessesPerPage(){
+            $stmt = $this->db->prepare("
+                SELECT 
+                    p.page_name, 
+                    COUNT(1) as num_occurrences, 
+                    MAX(al.access_timestamp) as last_access,
+                    ROUND(COUNT(1) * 100 / total.total_count, 2) as access_percentage
+                from Page p
+                JOIN Access_Log al ON al.page_id = p.page_id
+                JOIN(SELECT COUNT(1) as total_count FROM Access_Log ) AS total
+                GROUP BY p.page_name, total.total_count
+                ORDER BY num_occurrences DESC;
+        ");
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+        $accesses = $result->fetch_all(MYSQLI_ASSOC);
+        $stmt->close();
+        
+        return $accesses;
         }
     }
 ?>
