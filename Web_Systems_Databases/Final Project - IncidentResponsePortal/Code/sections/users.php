@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 
 // handle request to delete an user
 if (isset($_GET['action']) && $_GET['action'] === 'delete' && isset($_GET['id'])) {
-    var_dump($_GET['id']);
+    // var_dump($_GET['id']);
     $userController->deleteUser($_GET['id']);
     header("Location: " . $_SERVER['PHP_SELF'] . "?section=users");    
 
