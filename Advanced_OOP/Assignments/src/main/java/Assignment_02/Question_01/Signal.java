@@ -11,8 +11,8 @@ public class Signal {
     private final int SAMPLING = 1000;
 
     // Constructor, where we start the timer loop and the observers array
-    public Signal(Sampler sampler) {
-        this.sampler = sampler;
+    public Signal() {
+        this.sampler = new SinusSampler();
 
         theObservers = new ArrayList<>();
         System.out.println("Signal constructor");

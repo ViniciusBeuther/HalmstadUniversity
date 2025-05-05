@@ -6,8 +6,8 @@ public class Main {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             // Create sampler and signal instances
-            Sampler sampler = new SinusSampler();
-            Signal signal = new Signal(sampler);
+
+            Signal signal = new Signal();
 
             // Create the graph and text observer that will be placed on the window
             GraphObserver graph = new GraphObserver();

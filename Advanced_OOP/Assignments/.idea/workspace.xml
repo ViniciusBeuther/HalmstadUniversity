@@ -5,15 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0d76040a-d166-4535-af5b-75fa21362c92" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Assignment_02/Question_08/Filter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Assignment_02/Question_08/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Assignment_02/Question_08/ShortStringFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/FinalProject_Tetris/Controller/TetrisController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/FinalProject_Tetris/Model/Piece.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/FinalProject_Tetris/Model/PieceFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/FinalProject_Tetris/Model/TetrisModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/FinalProject_Tetris/TetrisGame.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/FinalProject_Tetris/View/TetrisView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Assignment_02/Question_04/GraphView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Assignment_02/Question_04/GraphView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Assignment_02/Question_04/ModelObserver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Assignment_02/Question_04/ModelObserver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Assignment_02/Question_04/NumberModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Assignment_02/Question_04/NumberModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Assignment_02/Question_04/NumberView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Assignment_02/Question_04/NumberView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Assignment_02/Question_04/ObserverGraph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Assignment_02/Question_04/ObserverGraph.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,31 +42,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Assignment_01.Question_14.Main.executor": "Run",
-    "Application.Assignment_01.Question_15.Main.executor": "Run",
-    "Application.Assignment_02.Question_01.Main.executor": "Run",
-    "Application.Assignment_02.Question_08.Main.executor": "Run",
-    "Application.Main.executor": "Run",
-    "Application.MatrixInteractive.executor": "Run",
-    "Application.ObserverGraph.executor": "Run",
-    "Application.StackInteractive.executor": "Run",
-    "JUnit.StackTest.executor": "Run",
-    "JUnit.StackTest.initialization.executor": "Run",
-    "JUnit.StackTest.popElements.executor": "Run",
-    "JUnit.StackTest.pushElements.executor": "Run",
-    "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/viniciusbeuther/Documents/University/UDESC/HalmstadUniversity/Advanced_OOP/Assignments/src/main/java/Assignment_02/Question_08",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Assignment_01.Question_14.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Assignment_01.Question_15.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Assignment_02.Question_01.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Assignment_02.Question_08.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.MatrixInteractive.executor&quot;: &quot;Run&quot;,
+    &quot;Application.ObserverGraph.executor&quot;: &quot;Run&quot;,
+    &quot;Application.StackInteractive.executor&quot;: &quot;Run&quot;,
+    &quot;Application.TetrisGame.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.StackTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.StackTest.initialization.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.StackTest.popElements.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.StackTest.pushElements.executor&quot;: &quot;Run&quot;,
+    &quot;Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/viniciusbeuther/Documents/University/UDESC/HalmstadUniversity/Advanced_OOP/Assignments/src/main/java/Assignment_02/Question_08&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/java/Assignment_02/Question_08" />
@@ -84,7 +84,7 @@
       <recent name="Assignment_01.Question_09" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Assignment_02.Question_08.Main">
+  <component name="RunManager" selected="Application.Assignment_01.Question_15.Main">
     <configuration name="Assignment_01.Question_15.Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Assignment_01.Question_15.Main" />
       <module name="Assignments" />
