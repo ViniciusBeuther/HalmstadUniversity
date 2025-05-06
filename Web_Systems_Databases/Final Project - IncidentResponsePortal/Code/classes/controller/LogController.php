@@ -62,6 +62,10 @@ class LogController {
         return $this->logModel->getAccessesPerPage();
     }
 
+    public function getVisualizationStats($lastDays){
+        return $this->logModel->getVisualizationStats($lastDays);
+    }
+
     /**
      * Get the HTTP_USER_AGENT and check what is the browser, it uses the method stripos
      * to find the first occurrence in the string for the main browsers

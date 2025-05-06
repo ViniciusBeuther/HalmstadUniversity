@@ -72,5 +72,27 @@
         
         return $accesses;
         }
+
+        public function getVisualizationStats($inTheLastDays){
+            if(!is_numeric($inTheLastDays) || $inTheLastDays <= 0) return;
+            
+            $stmt = $this->db->prepare("
+                SELECT
+                    DATE(access_timestamp) AS access_date,
+                    COUNT(*) AS total_access
+                FROM Access_Log
+                WHERE access_timestamp >= CURDATE() - INTERVAL {$inTheLastDays} DAY
+                GROUP BY access_date
+                ORDER BY access_date DESC;
+            ");
+
+            $stmt->execute();
+
+            $result = $stmt->get_result();
+            $data = $result->fetch_all(MYSQLI_ASSOC);
+            $stmt->close();
+
+            return $data;
+        }
     }
 ?>
