@@ -1,5 +1,6 @@
 package FinalProject_Tetris.View;
 
+import FinalProject_Tetris.Model.Cell;
 import FinalProject_Tetris.Model.Piece;
 
 import javax.swing.*;
@@ -12,24 +13,31 @@ public class TetrisView extends JPanel{
     private static final int OFFSET_X = (WIDTH - (10 * cellSize)) / 2;
     private static final int OFFSET_Y = (HEIGHT - (20 * cellSize)) / 2;
 
-    private int[][] board = new int[20][10];
+    private Cell[][] board = new Cell[20][10];
     private Piece currentPiece;
 
     public TetrisView(){
+        /** Initialize with empty cells */
+        for(int i=0; i < board.length; i++){
+            for(int j=0; j < board[i].length; j++){
+                board[i][j] = new Cell(false, Color.black);
+            }
+        }
+
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         this.setBackground(new Color(0, 0,0));
         this.setLayout(null);
         this.printBoard();
     }
 
-    public int[][] getBoard(){
+    public Cell[][] getBoard(){
         return this.board;
     }
 
     public void printBoard(){
         for(int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
-                System.out.print((board[i][j] == 0 ? ". " : "# ")); // board cell
+                System.out.print((board[i][j] == null || !board[i][j].isFilled() ? ". " : "# ")); // board cell
             }
             System.out.println();
         }
@@ -61,7 +69,7 @@ public class TetrisView extends JPanel{
         int row = this.getCurrentPiece().getRow();
         int column = this.getCurrentPiece().getCol();
 
-        g2d.setColor(Color.ORANGE);
+        g2d.setColor(this.currentPiece.getColor());
 
         for(int i=0; i < shape.length; i++){
             for(int j=0; j < shape[i].length; j++){
@@ -91,17 +99,48 @@ public class TetrisView extends JPanel{
                 int x = OFFSET_X + col * cellSize;
                 int y = OFFSET_Y + row * cellSize;
 
-                if (board[row][col] == 0) {
-                    g2d.setColor(Color.LIGHT_GRAY); // célula vazia
-                    g2d.drawRect(x, y, cellSize, cellSize); // apenas borda
+                if (!board[row][col].isFilled()) {
+                    g2d.setColor(Color.LIGHT_GRAY);
+                    g2d.drawRect(x, y, cellSize, cellSize);
                 } else {
-                    g2d.setColor(Color.BLUE); // célula preenchida
+                    g2d.setColor(board[row][col].getColor());
                     g2d.fillRect(x, y, cellSize, cellSize);
-                    g2d.setColor(Color.BLACK); // borda
+                    g2d.setColor(Color.BLACK);
                     g2d.drawRect(x, y, cellSize, cellSize);
                 }
             }
         }
     }
 
+    public void canCleanLines(){
+        Cell board[][] = getBoard();
+        int rows = board.length;
+        int columns = board[0].length;
+
+        for(int i = rows - 1; i >= 0; i--){
+            boolean isFullLine = true;
+
+            for(int j=0; j < columns; j++){
+                if(board[i][j] == null || !board[i][j].isFilled()){
+                    isFullLine = false;
+                    break;
+                }
+            }
+
+            /** if the line is full, moving the row above one line down */
+            if(isFullLine){
+                for(int k=i; k > 0; k--){
+                    board[k] = board[k - 1].clone();
+                }
+
+                /** creates a new empty line above */
+                board[0] = new Cell[columns];
+                for(int j=0; j < columns; j++){
+                    board[0][j] = new Cell(false, Color.black);
+                }
+
+                i++;
+            }
+        }
+    }
 }

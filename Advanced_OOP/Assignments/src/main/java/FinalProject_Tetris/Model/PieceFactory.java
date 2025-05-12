@@ -1,5 +1,6 @@
 package FinalProject_Tetris.Model;
 
+import java.awt.*;
 import java.util.Random;
 
 public class PieceFactory{
@@ -17,7 +18,17 @@ public class PieceFactory{
 
     public Piece createRandomPiece(){
         int[][] shape = SHAPES[this.random.nextInt(SHAPES.length)];
+        Color color = getRandomColor();
 
-        return new Piece(shape);
+        return new Piece(shape, color);
+    }
+
+    private Color getRandomColor(){
+        Color[] colors = {
+                Color.RED, Color.GREEN, Color.YELLOW,
+                Color.CYAN, Color.MAGENTA, Color.ORANGE, Color.PINK
+        };
+
+        return colors[random.nextInt(colors.length)];
     }
 }
