@@ -25,7 +25,7 @@ public class TetrisView extends JPanel{
         }
 
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
-        this.setBackground(new Color(0, 0,0));
+        this.setBackground(new Color(204, 255,255));
         this.setLayout(null);
         this.printBoard();
     }
@@ -83,7 +83,7 @@ public class TetrisView extends JPanel{
                     g2d.setColor(Color.BLACK);
                     g2d.drawRect(x, y, cellSize, cellSize);
 
-                    g2d.setColor(Color.orange);
+                    g2d.setColor(this.currentPiece.getColor());
                 }
             }
         }

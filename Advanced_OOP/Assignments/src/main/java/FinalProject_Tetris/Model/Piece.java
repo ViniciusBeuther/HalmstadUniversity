@@ -27,16 +27,8 @@ public class Piece{
         return row;
     }
 
-    public void setRow(int i){
-        this.row = i;
-    }
-
     public int getCol() {
         return col;
-    }
-
-    public void setCol(int i){
-        this.col = i;
     }
 
     public void movePieceDown(Cell[][] board){
