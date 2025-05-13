@@ -17,7 +17,7 @@ public class TetrisView extends JPanel{
     private Piece currentPiece;
 
     public TetrisView(){
-        /** Initialize with empty cells */
+        /* Initialize with empty cells */
         for(int i=0; i < board.length; i++){
             for(int j=0; j < board[i].length; j++){
                 board[i][j] = new Cell(false, Color.black);
@@ -112,10 +112,11 @@ public class TetrisView extends JPanel{
         }
     }
 
-    public void canCleanLines(){
+    public int canCleanLines(){
         Cell board[][] = getBoard();
         int rows = board.length;
         int columns = board[0].length;
+        int linesCleanedCounter = 0;
 
         for(int i = rows - 1; i >= 0; i--){
             boolean isFullLine = true;
@@ -140,7 +141,10 @@ public class TetrisView extends JPanel{
                 }
 
                 i++;
+                linesCleanedCounter++;
             }
         }
+
+        return linesCleanedCounter;
     }
 }
