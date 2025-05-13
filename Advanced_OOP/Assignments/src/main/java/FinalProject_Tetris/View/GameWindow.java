@@ -57,7 +57,7 @@ public class GameWindow {
     public void start() {
         PieceFactory factory = new PieceFactory();
 
-        // Use arrays para contornar a restrição
+        // using arrays to avoid issue in timer loop
         final Piece[] currentPieceHolder = {factory.createRandomPiece()};
         final Piece[] nextPieceHolder = {factory.createRandomPiece()};
 
