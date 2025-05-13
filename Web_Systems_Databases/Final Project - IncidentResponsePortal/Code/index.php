@@ -76,7 +76,6 @@
         $form .= <<<END
         <input type="submit" value="Login" id="login__loginBtn">
         </form>
-        <p>Don't have an account? Click <a href="classes/view/register.php">Here</a></p>
         </article>
     END;
 

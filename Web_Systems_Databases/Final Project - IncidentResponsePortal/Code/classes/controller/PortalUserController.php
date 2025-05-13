@@ -21,7 +21,9 @@ class PortalUserController{
 
     public function login($username, $password){
         $isLoggedIn = $this->userModel->login($username, $password);
-        $_SESSION["user_id"] = $isLoggedIn["user_id"];
+        if(isset($isLoggedIn["user_id"])){
+            $_SESSION["user_id"] = $isLoggedIn["user_id"];
+        }
         return $isLoggedIn;
     }
 
