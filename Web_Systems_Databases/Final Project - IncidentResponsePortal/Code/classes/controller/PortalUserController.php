@@ -46,6 +46,14 @@ class PortalUserController{
 
         if($success) return true;
     }
+
+    public function getRoleName($role_id){
+        if(!isset($role_id) || !is_numeric($role_id)) return;
+
+        $role_name = $this->userModel->getRoleName($role_id);
+        
+        return $role_name;
+    }
 }
 
 ?>

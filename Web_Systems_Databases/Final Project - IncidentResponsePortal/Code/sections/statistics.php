@@ -13,8 +13,12 @@ $logController = new LogController($mysqli);
 $logController->trackVisit();
 
 // get all accesses per page (query already have filtered/grouped the data)
-$accesses_per_page = $logController->getAccessesPerPage();
-
+$accesses_per_page_raw = $logController->getAccessesPerPage();
+$accesses_per_page = array_filter($accesses_per_page_raw, function ($access) {
+    $page = strtolower($access['page_name']);
+    return !str_contains($page, 'success') && 
+           !str_contains($page, 'submit');
+});
 
 // Prepare data in an array to display in the chart.js
 $access_chart_data = [];
@@ -36,10 +40,16 @@ function formatPageName($page_name){
     if (str_contains($page_name, '-')) {
         $temp = explode('-', $page_name);
         return ucfirst($temp[1]);
-    } else if (str_contains($page_name, '.php')) {
+    } else if(str_contains(strtolower($page_name), 'index')) {
+        return 'Login';
+    } else if(str_contains(strtolower($page_name), 'initial')){
+        return 'Dashboard';
+    } 
+    else if (str_contains($page_name, '.php')) {
         $temp = explode(".", $page_name);
         return ucfirst($temp[0]);
-    } else {
+    } 
+    else {
         return "Error";
     }
 }
@@ -139,6 +149,13 @@ function formatPageName($page_name){
     width: 100%;
     height: auto;
 }
+
+@media (max-width: 80rem) {
+    .lastAccessColumn {
+        display: none;
+    }
+}
+
 </style>
 <article class="statistics_parent_container">
     <div class="statistics_accesses_chart_container statistics_info_background">
@@ -151,14 +168,14 @@ function formatPageName($page_name){
             <tr>
                 <th>Page Name</th>
                 <th style="text-align: center;">Number of Accesses</th>
-                <th>Last Access at</th>
+                <th class="lastAccessColumn">Last Access at</th>
                 <th style="text-align: center;">Access %</th>
             </tr>
             <?php foreach ($accesses_per_page as $access): ?>
                 <tr>
                     <td><?= formatPageName($access['page_name']) ?? 'error' ?></td>
                     <td style="text-align: center;"><?= $access['num_occurrences'] ?? 'error' ?></td>
-                    <td><?= $access['last_access'] ?? 'error' ?></td>
+                    <td class="lastAccessColumn"><?= $access['last_access'] ?? 'error' ?></td>
                     <td style="text-align: center;"><?= $access['access_percentage'] ?? 'error' ?>%</td>
                 </tr>
             <?php endforeach; ?>
