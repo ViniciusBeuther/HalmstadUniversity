@@ -2,6 +2,10 @@ package FinalProject_Tetris.Model;
 
 import java.awt.*;
 
+/**
+ * This class is what build the board, a board is a matrix of Cells (rows/columns)
+ * is stores if the cell is filled or not and the color. Contain the getters and setters
+ * */
 public class Cell {
     private boolean filled;
     private Color color;

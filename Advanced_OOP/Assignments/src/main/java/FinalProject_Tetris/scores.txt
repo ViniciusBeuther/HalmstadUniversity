@@ -1,0 +1,8 @@
+test01: 0
+vinicius: 11
+vinicius b: 55
+tester2: 38
+test4: 14
+user231: 39
+k: 0
+teste: 12

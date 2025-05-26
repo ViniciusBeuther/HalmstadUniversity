@@ -1,24 +1,41 @@
 package FinalProject_Tetris.View;
 
 import FinalProject_Tetris.Controller.TetrisController;
+import FinalProject_Tetris.Misc.SoundUtils;
 import FinalProject_Tetris.Model.Cell;
 import FinalProject_Tetris.Model.Piece;
 import FinalProject_Tetris.Model.PieceFactory;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
+
+/**
+ * This class takes care of the game loop, where we have attributes to save the level,
+ * number of rows cleaned and an initial delay, which will be increased over the time/level ups.
+ *
+ * We also have the getters/setters
+ * */
 public class GameWindow {
     private int[] level;
     private int[] numberOfRowsCleaned;
     private int initialDelay;
     Timer[] gameTimer = new Timer[1];
 
+    // Constructor, initialize the level/delay and number of rows cleaned
     public GameWindow(){
         setLevel(new int[]{1});
         setNumberOfRowsCleaned(new int[] {0});
         setInitialDelay(800);
-
     }
 
     public void setLevel(int[] level) {
@@ -35,13 +52,17 @@ public class GameWindow {
 
     /**
      * Start the window
-     * @param view: the TetrisView component, where it stores the board and window specifications
+     * @param view: the TetrisView component, where it stores the board and window specifications (board)
+     * @param side: is the Side bar containing extra info such as levels, next piece and leaderboard.
+     *
+     * It also start the game window.
      * */
     public void initializeWindow(TetrisView view, SidePanel side){
+        System.out.println("Log (GameWindow): Building game window.");
         JFrame window = new JFrame();
         JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.add(view, BorderLayout.CENTER);
-        mainPanel.add(side, BorderLayout.EAST);
+        mainPanel.add(side, BorderLayout.WEST);
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         window.setResizable(false);
         window.add(mainPanel);
@@ -56,7 +77,7 @@ public class GameWindow {
      **/
     public void start() {
         PieceFactory factory = new PieceFactory();
-
+        System.out.println("Log (Game Window): starting game...");
         // using arrays to avoid issue in timer loop
         final Piece[] currentPieceHolder = {factory.createRandomPiece()};
         final Piece[] nextPieceHolder = {factory.createRandomPiece()};
@@ -74,7 +95,11 @@ public class GameWindow {
         tetrisView.requestFocusInWindow();
         TetrisController tc = new TetrisController(tetrisView);
 
-        /* Game loop */
+        /* Game loop, also verify the collisions,
+        * it finishes the game if the user lost, handle the score saving
+        *  and the timer loop, move the piece down every X seconds
+        **/
+        System.out.println("Log (Game Window): Starting timer(loop).");
         gameTimer[0] = new Timer(initialDelay, e-> {
             Piece current = tetrisView.getCurrentPiece();
             Cell[][] board = tetrisView.getBoard();
@@ -88,8 +113,89 @@ public class GameWindow {
 
                 if(nextPieceHolder[0].hasCollision(board, nextPieceHolder[0].getRow(), nextPieceHolder[0].getCol())){
                     ((Timer) e.getSource()).stop();
-                    JOptionPane.showMessageDialog(null, "Game over!");
+                    SoundUtils.playSound("/game_over.wav");
+                    // JOptionPane.showMessageDialog(null, "Game over!");
+                    System.out.println("Log (Game Window): Game over, getting username.");
+
+                    String username = JOptionPane.showInputDialog(null, "Game over!\nPut your name here if you want to save your score:", "Input Dialog", JOptionPane.PLAIN_MESSAGE);
+
+                    if (username != "") {
+                        try (BufferedWriter writer = new BufferedWriter(new FileWriter("scores.txt", true))) {
+                            writer.write(username + ": " + numberOfRowsCleaned[0] + "\n");
+                            System.out.println("Log (Game Window): Username saved on score.txt.");
+
+                        } catch (IOException er) {
+                            System.err.println("An error occurred while writing to the file: " + er.getMessage());
+                        }
+                    } else {
+                        System.out.println("User doesn't want to save the score.");
+                    }
+
+
+
+                    // Player's score
+                    System.out.println("Log (Game Window): Show player score.");
+                    JOptionPane.showMessageDialog(null, "Your score is: " + numberOfRowsCleaned[0]);
+
+                    
+                    // Print out the top n scores saved in the leaderboard
+                    int n = 3;
+                    
+                    Map<String, Integer> scores = new HashMap<>();
+                    BufferedReader reader = null;
+					try {
+						reader = new BufferedReader(new FileReader("scores.txt"));
+					} catch (FileNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+                    String line;
+                    
+                    try {
+						while ((line = reader.readLine()) != null) {
+						    String[] fields = line.split(":");
+						    String name = fields[0].trim();
+						    int score = Integer.parseInt(fields[1].trim());
+							if (!scores.containsKey(name) || score > scores.get(name)) {
+								scores.put(name, score);
+							}
+
+						}
+					} catch (NumberFormatException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+                    try {
+						reader.close();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+
+                    StringBuilder ranking = new StringBuilder("🏆 Top " + n + " Scores 🏆\n\n");
+                    for (int i = 1; i <= n && !scores.isEmpty(); i++) {
+                        String maxName = null;
+                        int maxValue = Integer.MIN_VALUE;
+                        for (String name : scores.keySet()) {
+                        	int value = scores.get(name);
+                            if (maxName == null || value > maxValue) {
+                                maxName = name;
+                                maxValue = value;
+                            }
+                        }
+                        ranking.append(String.format("%d. %s - %d\n", i, maxName, maxValue));
+                        scores.remove(maxName);
+                    }
+                    
+
+                    // Show ranking
+                    JOptionPane.showMessageDialog(null, ranking.toString(), "Leaderboard", JOptionPane.INFORMATION_MESSAGE);
+                    
                     System.exit(0);
+                    
                 } else {
                     tetrisView.setCurrentPiece(nextPieceHolder[0]);
                     currentPieceHolder[0] = nextPieceHolder[0];
